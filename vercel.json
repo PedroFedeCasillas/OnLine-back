@@ -1,9 +1,6 @@
 {
   "version": 2,
   "name": "OnLine",
-  "env": {
-    "MONGODB": "@OnLine-back_mongodb"
-  },
   "builds": [
     {
       "src": "src/main.ts",
