@@ -1,6 +1,1 @@
-{
-  "version": 2,
-  "name": "OnLine",
-  "builds": [{ "src": "src/main.ts", "use": "@vercel/node" }],
-  "routes": [{ "src": "/api/v1/(.*)", "dest": "src/main.ts" }]
-}
+
