@@ -3,22 +3,22 @@
   "name": "OnLine",
   "builds": [
     {
-      "src": "dist/**/*.js",
+      "src": "src/main.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/v1/docs",
-      "dest": "dist/main.js"
+      "dest": "src/main.ts"
     },
     {
       "src": "/api/v1/(.*)",
-      "dest": "dist/main.js"
+      "dest": "src/main.ts"
     },
     {
       "src": "/(.*)",
-      "dest": "dist/main.js"
+      "dest": "src/main.ts"
     }
   ]
 }
