@@ -9,9 +9,18 @@
   ],
   "routes": [
     {
+      "src": "/api/v1/docs",
+      "dest": "dist/main.js"
+    },
+    {
+      "src": "/api/v1/(.*)",
+      "dest": "dist/main.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "dist/main.js"
     }
   ]
 }
+
 
