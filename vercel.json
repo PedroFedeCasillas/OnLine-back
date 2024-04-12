@@ -9,7 +9,7 @@
   ],
   "routes": [
       {
-          "src": "api/v1/(.*)",
+          "src": "/api/v1/(.*)",
           "dest": "src/main.ts",
           "methods": [
               "GET",
