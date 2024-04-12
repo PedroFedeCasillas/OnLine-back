@@ -9,14 +9,6 @@
   ],
   "routes": [
     {
-      "src": "/api/v1/docs",
-      "dest": "src/main.ts"
-    },
-    {
-      "src": "/api/v1/(.*)",
-      "dest": "src/main.ts"
-    },
-    {
       "src": "/(.*)",
       "dest": "src/main.ts"
     }

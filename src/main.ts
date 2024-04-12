@@ -24,7 +24,7 @@ async function bootstrap() {
     .setDescription('The Red Social OnLine API endpoints')
     .setVersion('1.0')
     .addServer('http://localhost:3001', 'Local Server')
-    .addServer('https://api.example.com', 'Production Server')
+    .addServer('https://on-line-back.vercel.app', 'Production Server')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
