@@ -26,6 +26,10 @@ docker-compose up -d
 ```
 npm run start:dev
 ```
+8. Documentacion API REST:
+```
+http://localhost:3001/doc
+```
 
 <!-- 8. Recontruir la base de datos con la semilla
 ```
