@@ -1,10 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-// import { Post } from './post.schema';
+import mongoose, { Document } from 'mongoose';
+import { Posts } from 'src/post/entities/post.entity';
 
 @Schema()
 export class User extends Document {
-
   @Prop()
   fullName: string;
 
@@ -16,8 +15,9 @@ export class User extends Document {
 
   @Prop()
   age: number;
-  //   @Prop({ type: [{ type: Post.schema }] })
-  //   posts: Post[];
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }] })
+  posts: Posts[];
 
   @Prop({ default: Date.now })
   createdAt: Date;
@@ -27,6 +27,6 @@ export class User extends Document {
 
   @Prop({ default: Date.now })
   deletedAt: Date;
+    
 }
-
 export const UserSchema = SchemaFactory.createForClass(User);
