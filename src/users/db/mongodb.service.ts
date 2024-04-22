@@ -10,7 +10,6 @@ import { mongoExceptionHandler } from 'src/common/mongoExceptionHandler';
 @Injectable()
 export class MongoDbService implements IUserDao {
   constructor(
-  //  @InjectModel(User.name) private readonly userModel: Model<User>,
     @InjectModel(User.name) private readonly _userModel: Model<User>,
   ) {}
 
