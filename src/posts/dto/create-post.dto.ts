@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, IsNumber, IsMongoId } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
 
 export class CreatePostDto {
   @ApiProperty()
@@ -19,6 +19,5 @@ export class CreatePostDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsMongoId()
   userId: string;
 }

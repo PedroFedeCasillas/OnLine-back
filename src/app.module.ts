@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { EnvConfiguration } from './config/app.config';
 import { JoiValidationSchema } from './config/joi.validation';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PostModule } from './post/post.module';
+import { PostModule } from './posts/post.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -15,8 +15,8 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGODB),
-    UsersModule,
-    PostModule,
+    forwardRef(() => UsersModule),
+    forwardRef(() => PostModule), 
     AuthModule
   ],
   controllers: [],

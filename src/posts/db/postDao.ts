@@ -4,15 +4,16 @@ import { Posts } from "../entities/post.entity";
 
 
 export interface IPostDao {
+  
   create(createPostDto: CreatePostDto): Promise<Posts>;
 
-  findAll(): Promise<Array<Posts>>;
+  findAll(): Promise<Posts[]>;
 
   findById(id: string): Promise<Posts>;
-  
-  findByPhone(phone: string): Promise<Posts>;
 
   update(id: string, updatePostDto: UpdatePostDto): Promise<Posts>;
 
   remove(id: string): Promise<Posts>;
+
+  // addUserToPost(postId: string, userId: string): Promise<Posts>;
 }

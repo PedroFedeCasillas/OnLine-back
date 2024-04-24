@@ -34,9 +34,10 @@ export class MongoDbService implements IUserDao {
 
   async findOne(id: string): Promise<User> {
     try {
-      const user = await this._userModel.findById(id).exec();
+      const user = await this._userModel.findById(id)
+        .exec();
       if (!user) {
-        throw new NotFoundException('User not found');
+          throw new NotFoundException('User not found');
       }
       return user;
     } catch (error) {
