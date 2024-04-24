@@ -48,4 +48,10 @@ export class PostController {
   remove(@Param('id') id: string) {
     return this.postService.remove(id);
   }
+
+  // @Post(':postId/users/:userId')
+  // async addUserToPost(@Param('postId') postId: string, @Param('userId') userId: string) {
+  //   return this.postService.addUserToPost(postId, userId);
+  // }
+
 }

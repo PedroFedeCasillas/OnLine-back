@@ -68,4 +68,10 @@ export class PostService {
       throw error;
     }
   }
+
+  // async addUserToPost(postId: string, userId: string): Promise<Posts> {
+  //   return this._db.addUserToPost(postId, userId);
+  // }
+  
+
 }
