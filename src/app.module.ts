@@ -6,6 +6,7 @@ import { JoiValidationSchema } from './config/joi.validation';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostModule } from './posts/post.module';
 import { AuthModule } from './auth/auth.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { AuthModule } from './auth/auth.module';
     MongooseModule.forRoot(process.env.MONGODB),
     forwardRef(() => UsersModule),
     forwardRef(() => PostModule), 
-    AuthModule
+    AuthModule, CloudinaryModule
   ],
   controllers: [],
   providers: [],

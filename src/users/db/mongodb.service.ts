@@ -32,6 +32,10 @@ export class MongoDbService implements IUserDao {
     }
   }
 
+  async findOneByEmail(email: string): Promise<User | null> {
+    return this._userModel.findOne({ email }).exec();
+  }
+
   async findOne(id: string): Promise<User> {
     try {
       const user = await this._userModel.findById(id)
