@@ -6,18 +6,17 @@ import {
   Post,
   Delete,
   Patch,
-  UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiParam, ApiTags } from '@nestjs/swagger';
 import { PostService } from '../services/post.service';
 import { CreatePostDto } from '../dto/create-post.dto';
 import { Posts } from '../entities/post.entity';
 import { UpdatePostDto } from '../dto/update-post.dto';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+// import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Posts')
-@ApiBearerAuth()
-@UseGuards(JwtAuthGuard)
+// @ApiBearerAuth()
+// @UseGuards(JwtAuthGuard)
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}

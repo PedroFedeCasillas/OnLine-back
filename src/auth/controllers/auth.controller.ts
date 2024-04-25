@@ -10,6 +10,11 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
+  // @Post('login')
+  // async signIn(@Body() createUserDto: CreateUserDto) {
+  //   return await this.authService.signIn(createUserDto.email, createUserDto.password);
+  // }
+
   @Post('login')
   async signIn(@Req() req) {
     return await this.authService.signIn(req.user);
