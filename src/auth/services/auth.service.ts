@@ -22,6 +22,20 @@ export class AuthService {
     return null;
   }
 
+  // async signIn(email: string, password: string) {
+  //   const user = await this.validateUser(email, password);
+  //   if (!user) {
+  //     throw new NotFoundException('Invalid credentials');
+  //   }
+  //   const payload = { email: user.email, sub: user.id };
+  //   return {
+  //     id: user.id, // Agrega el ID del usuario
+  //     name: user.name, // Asegúrate de que el nombre del usuario esté disponible en el objeto user
+  //     email: user.email, // El correo electrónico del usuario
+  //     access_token: this.jwtService.sign(payload), // El token de acceso JWT
+  //   };
+  // }
+
   async signIn(user: any) {
     const payload = {
       email: user.email,
