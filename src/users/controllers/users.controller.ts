@@ -21,9 +21,9 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class UsersController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('create')
-  async create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  @Post('')
+  async createUser(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
   }
 
   @Get('all')
@@ -35,8 +35,8 @@ export class UsersController {
   @ApiParam({
     name: 'id',
   })
-  findOne(@Param('id') id: string) {
-    return this.userService.getById(id);
+  getUserById(@Param('id') id: string) {
+    return this.userService.getUserById(id);
   }
 
   @Put(':id')

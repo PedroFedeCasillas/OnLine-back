@@ -18,7 +18,8 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
     MongooseModule.forRoot(process.env.MONGODB),
     forwardRef(() => UsersModule),
     forwardRef(() => PostModule), 
-    AuthModule, CloudinaryModule
+    AuthModule, 
+    CloudinaryModule,
   ],
   controllers: [],
   providers: [],

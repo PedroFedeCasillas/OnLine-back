@@ -15,13 +15,14 @@ import { UsersModule } from 'src/users/users.module';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         secret: config.get('JWT_SECRET'),
-        signOptions: {
-          expiresIn: config.get('EXPIRES_IN'),
-        },
       }),
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthService, 
+    LocalStrategy, 
+    JwtStrategy,
+  ],
 })
 export class AuthModule {}

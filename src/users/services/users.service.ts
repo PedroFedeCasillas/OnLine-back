@@ -5,6 +5,7 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 import { IUserDao } from '../db/userDao';
 import { MongoDbService } from '../db/mongodb.service';
 import * as bcrypt from 'bcrypt';
+import { ErrorManager } from 'src/utils/error.manager';
 
 @Injectable()
 export class UserService {
@@ -16,38 +17,32 @@ export class UserService {
     this._db = _mongoDbService;
   }
 
-  async checkPassword(password: string, passwordDB: string): Promise<boolean> {
-    return await bcrypt.compare(password, passwordDB);
-  }
-
   async findOneByEmail(email: string): Promise<User | undefined> {
     return this._db.findOneByEmail(email);
   }
-  
-  async hashPassword(password: string): Promise<string> {
-    const salt = await bcrypt.genSalt(10);
-    return await bcrypt.hash(password, salt);
-  }
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
     try {
-      const hash = await this.hashPassword(createUserDto.password);
-      const newUser = await this._db.create({
-        ...createUserDto,
-        password: hash,
-      });
-      return newUser;
+      createUserDto.password = await bcrypt.hash(
+        createUserDto.password,
+        +process.env.HASH_SALT,
+      );
+      return await this._db.create(createUserDto);
     } catch (error) {
-      throw error;
+      throw ErrorManager.createSignaturError(error.message);
     }
   }
 
   // async create(createUserDto: CreateUserDto): Promise<User> {
   //   try {
-  //     const createUser = this._db.create(createUserDto);
-  //     return createUser;
+  //     const hash = await this.hashPassword(createUserDto.password);
+  //     const newUser = await this._db.create({
+  //       ...createUserDto,
+  //       password: hash,
+  //     });
+  //     return newUser;
   //   } catch (error) {
-  //     throw error;
+  //     throw ErrorManager.createSignaturError(error.message);
   //   }
   // }
 
@@ -57,17 +52,17 @@ export class UserService {
       if (!results) throw new NotFoundException('Could not find any users');
       return results;
     } catch (error) {
-      throw error;
+      throw ErrorManager.createSignaturError(error.message);
     }
   }
 
-  async getById(id: string): Promise<User> {
+  async getUserById(id: string): Promise<User> {
     try {
       const user = await this._db.findOne(id);
       if (!user) throw new NotFoundException('User not found');
       return user;
     } catch (error) {
-      throw error;
+      throw ErrorManager.createSignaturError(error.message);
     }
   }
 
@@ -77,7 +72,7 @@ export class UserService {
       if (!user) throw new NotFoundException('User not found');
       return `User ${user.id} updated successfully`;
     } catch (error) {
-      throw error;
+      throw ErrorManager.createSignaturError(error.message);
     }
   }
 
@@ -87,7 +82,7 @@ export class UserService {
       if (!user) throw new NotFoundException('User not found');
       return `User ${user.id} deleted successfully`;
     } catch (error) {
-      throw error;
+      throw ErrorManager.createSignaturError(error.message);
     }
   }
 }
