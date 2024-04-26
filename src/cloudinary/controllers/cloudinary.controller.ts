@@ -1,12 +1,13 @@
 import {
   Controller,
   Post,
-  Body,
   UseInterceptors,
   UploadedFile,
   ParseFilePipe,
   MaxFileSizeValidator,
   FileTypeValidator,
+  Body,
+  BadRequestException,
 } from '@nestjs/common';
 import { CloudinaryService } from '../services/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -22,7 +23,7 @@ export class CloudinaryController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  //method to upload image to cloudinary
+  //método para subir una imagen a Cloudinary
   uploadImage(
     @UploadedFile(
       new ParseFilePipe({
@@ -44,12 +45,15 @@ export class CloudinaryController {
 
   @Post('uploadbuffer')
   async uploadImageToCloudinary(@Body('imageBuffer') imageBuffer: Buffer) {
+    if (!imageBuffer) {
+      throw new BadRequestException(
+        'No se proporcionó un buffer de imagen válido.',
+      );
+    }
     console.log('imageBuffer', imageBuffer);
-    // Aquí, asumo que tu CloudinaryService tiene un método llamado 'uploadImage'
-    // que toma un buffer y un tipo MIME y devuelve la URL de la imagen subida.
     const uploadedImageUrl =
       await this.cloudinaryService.uploadFile2(imageBuffer);
-
     return { imageUrl: uploadedImageUrl };
   }
+
 }
