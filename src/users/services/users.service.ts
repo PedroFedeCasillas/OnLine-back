@@ -29,22 +29,9 @@ export class UserService {
       );
       return await this._db.create(createUserDto);
     } catch (error) {
-      throw ErrorManager.createSignaturError(error.message);
+      throw error;
     }
   }
-
-  // async create(createUserDto: CreateUserDto): Promise<User> {
-  //   try {
-  //     const hash = await this.hashPassword(createUserDto.password);
-  //     const newUser = await this._db.create({
-  //       ...createUserDto,
-  //       password: hash,
-  //     });
-  //     return newUser;
-  //   } catch (error) {
-  //     throw ErrorManager.createSignaturError(error.message);
-  //   }
-  // }
 
   async getAll(): Promise<Array<User>> {
     try {
@@ -52,14 +39,14 @@ export class UserService {
       if (!results) throw new NotFoundException('Could not find any users');
       return results;
     } catch (error) {
-      throw ErrorManager.createSignaturError(error.message);
+      throw error;
     }
   }
 
   async getUserById(id: string): Promise<User> {
     try {
-      const user = await this._db.findOne(id);
-      if (!user) throw new NotFoundException('User not found');
+      const user: User = await this._db.findOne(id);
+      if (!user)throw new NotFoundException('User not found');
       return user;
     } catch (error) {
       throw ErrorManager.createSignaturError(error.message);

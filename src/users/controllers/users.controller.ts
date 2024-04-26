@@ -21,7 +21,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class UsersController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('')
+  @Post('create')
   async createUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
   }
@@ -39,12 +39,12 @@ export class UsersController {
     return this.userService.getUserById(id);
   }
 
-  @Put(':id')
+  @Put('update/:id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(id, updateUserDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   async remove(@Param('id') id: string) {
     return this.userService.remove(id);
   }
