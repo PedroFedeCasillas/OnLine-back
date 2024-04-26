@@ -11,7 +11,14 @@ import {
 } from '@nestjs/common';
 import { CloudinaryService } from '../services/cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiConsumes,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 // import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Cloudinary')
@@ -23,7 +30,23 @@ export class CloudinaryController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  //método para subir una imagen a Cloudinary
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Sube una imagen a Cloudinary',
+    required: true,
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+          description: 'Archivo de imagen a subir',
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Imagen cargada con éxito' })
+  @ApiResponse({ status: 400, description: 'Solicitud incorrecta' })
   uploadImage(
     @UploadedFile(
       new ParseFilePipe({
@@ -39,6 +62,23 @@ export class CloudinaryController {
   }
 
   @Post('uploadurl')
+  @ApiOperation({ summary: 'Carga una imagen a Cloudinary desde una URL' })
+  @ApiResponse({ status: 201, description: 'Imagen cargada con éxito' })
+  @ApiResponse({ status: 400, description: 'Solicitud incorrecta' })
+  @ApiBody({
+    description: 'URL de la imagen a cargar',
+    required: true,
+    schema: {
+      type: 'object',
+      properties: {
+        url: {
+          type: 'string',
+          format: 'uri',
+          description: 'La URL de la imagen que se va a cargar a Cloudinary',
+        },
+      },
+    },
+  })
   async uploadImageFromURL(@Body('url') imageUrl: string) {
     return this.cloudinaryService.uploadFromURL(imageUrl);
   }
@@ -55,5 +95,4 @@ export class CloudinaryController {
       await this.cloudinaryService.uploadFile2(imageBuffer);
     return { imageUrl: uploadedImageUrl };
   }
-
 }
