@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MongoDbService } from './db/mongodb.service';
 import { Posts, PostSchema } from './entities/post.entity';
 import { UsersModule } from 'src/users/users.module';
+import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UsersModule } from 'src/users/users.module';
         }
       ]),
       forwardRef(() => UsersModule),
+      CloudinaryModule,
   ],
   controllers: [PostController],
   providers: [PostService, MongoDbService],

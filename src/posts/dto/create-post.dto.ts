@@ -20,4 +20,9 @@ export class CreatePostDto {
   @ApiProperty()
   @IsNotEmpty()
   userId: string;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsString()
+  imageUrl?: string;
 }
