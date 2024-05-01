@@ -44,6 +44,9 @@ export class CloudinaryService {
   }
 
   async compressImageIfNeeded(file: Express.Multer.File): Promise<Buffer> {
+    if (!file) {
+      throw new Error('No se ha proporcionado ningún archivo.');
+    }
     if (file.size > this.MAX_SIZE) {
       const image = await Jimp.read(file.buffer);
       await image

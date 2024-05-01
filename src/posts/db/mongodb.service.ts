@@ -19,7 +19,7 @@ export class MongoDbService implements IPostDao {
       await createPost.save();
       return createPost;
     } catch (error) {
-      console.log('error', error);
+      console.log('Error en base de datos', error);
       if (error instanceof mongo.MongoError) mongoExceptionHandler(error);
       else throw error;
     }

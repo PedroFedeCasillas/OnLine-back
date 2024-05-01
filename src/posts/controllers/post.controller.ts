@@ -12,6 +12,7 @@ import { PostService } from '../services/post.service';
 import { CreatePostDto } from '../dto/create-post.dto';
 import { Posts } from '../entities/post.entity';
 import { UpdatePostDto } from '../dto/update-post.dto';
+// import { FileInterceptor } from '@nestjs/platform-express';
 // import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('Posts')
@@ -20,6 +21,14 @@ import { UpdatePostDto } from '../dto/update-post.dto';
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}
+
+
+  // @Post()
+  // @UseInterceptors(FileInterceptor('file'))
+  // create(@UploadedFile() file: Express.Multer.File, @Body() createPostDto: CreatePostDto){
+  //   console.log('Contenido del archivo:', file);
+  //   return this.postService.addOne(createPostDto, file);
+  // }
 
   @Post()
   async create(@Body() createPostDto: CreatePostDto): Promise<Posts> {
@@ -56,5 +65,4 @@ export class PostController {
   // async addUserToPost(@Param('postId') postId: string, @Param('userId') userId: string) {
   //   return this.postService.addUserToPost(postId, userId);
   // }
-
 }

@@ -26,6 +26,9 @@ export class Posts extends Document {
   @Prop({ type: Types.ObjectId, ref: 'User' })
   userId: User;
 
+  @Prop({type: String})
+  imageUrl: string;
+
 }
 
 export const PostSchema = SchemaFactory.createForClass(Posts);

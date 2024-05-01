@@ -4,15 +4,36 @@ import { CreatePostDto } from '../dto/create-post.dto';
 import { UpdatePostDto } from '../dto/update-post.dto';
 import { IPostDao } from '../db/postDao';
 import { MongoDbService } from '../db/mongodb.service';
+import { CloudinaryService } from 'src/cloudinary/services/cloudinary.service';
 
 @Injectable()
 export class PostService {
   private readonly _db: IPostDao
   constructor(
     readonly _mongoDbService: MongoDbService,
+    private readonly cloudinaryService: CloudinaryService,
   ) {
     this._db = _mongoDbService
   }
+
+  // async addOne(createPostDto: CreatePostDto, imageFile: Express.Multer.File): Promise<Posts> {
+  //   try {
+  //     console.log('Contenido del archivo en PostService:', imageFile);
+  //     // Subir la imagen a Cloudinary y obtener la URL
+  //     const cloudinaryResponse = await this.cloudinaryService.uploadFile(imageFile);
+  //     const imageUrl = cloudinaryResponse.url;
+  //     // Construir el objeto CreatePostDto con la URL de la imagen
+  //     const finalPostData = {
+  //       ...createPostDto,
+  //       imageUrl: imageUrl,
+  //     };
+  //     // Crear el post en la base de datos
+  //     const createdPost = await this._db.create(finalPostData);
+  //     return createdPost;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 
   async create(createPostDto: CreatePostDto): Promise<Posts> {
     try {
