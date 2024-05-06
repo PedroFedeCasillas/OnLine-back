@@ -19,6 +19,12 @@ export class User extends Document {
   @Prop()
   age: number;
 
+  @Prop({type: String})
+  imageProfile: string;
+
+  @Prop({type: String})
+  imagePortada: string;
+
   // @Prop({ type: [{ type: Types.ObjectId, ref: 'Post' }] })
   // posts: Posts[];
 
