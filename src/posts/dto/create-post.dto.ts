@@ -8,8 +8,8 @@ export class CreatePostDto {
   title: string;
 
   @ApiProperty()
-  @IsNotEmpty()
   @IsString()
+  @IsOptional()
   content: string;
 
   @ApiProperty()
