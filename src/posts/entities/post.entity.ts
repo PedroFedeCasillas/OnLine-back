@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
-import { User } from 'src/users/entities/user.entity';
+import { Document } from 'mongoose';
+// import { User } from 'src/users/entities/user.entity';
 
 
 @Schema()
@@ -23,8 +23,8 @@ export class Posts extends Document {
   @Prop({ default: Date.now })
   deletedAt: Date;
 
-  @Prop({ type: Types.ObjectId, ref: 'User' })
-  userId: User;
+  @Prop({ type: 'ObjectId', ref: 'User' })
+  userId: string; 
 
   @Prop({type: String})
   imageUrl: string;
