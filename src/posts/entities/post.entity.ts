@@ -8,7 +8,7 @@ export class Posts extends Document {
   @Prop({ required: true })
   title: string;
 
-  @Prop({ required: true })
+  @Prop()
   content: string;
 
   @Prop({ default: 0 })
